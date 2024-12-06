@@ -3,7 +3,7 @@ import time
 from concurrent.futures import as_completed, ThreadPoolExecutor
 
 
-def io_bound_sleep_three(task_num):
+def io_bound_simulator(task_num):
     """
     Simulates an IO bound task that takes task_num seconds to complete
 
@@ -41,7 +41,7 @@ def singlethreaded_demo():
     start = time.time()
     for task_num in task_list:
         try:
-            result = io_bound_sleep_three(task_num)
+            result = io_bound_simulator(task_num)
             print(f"Completed task {result} in {time.time() - start:.3f} seconds")
         except Exception as e:
             print(f"io_bound_sleep_three raised an exception: {e}")
@@ -59,7 +59,7 @@ def multithreading_demo():
 
     with ThreadPoolExecutor(max_workers=n_workers) as executor:
 
-        futures = [executor.submit(io_bound_sleep_three, task_num) for task_num in task_list]
+        futures = [executor.submit(io_bound_simulator, task_num) for task_num in task_list]
 
         start = time.time()
         for future in as_completed(futures):

@@ -14,7 +14,7 @@ def singlethreaded_demo():
     """
     Demonstrates the default single threaded version of the multithreading_demo below as a reference.
     """
-    print("Single threaded\n")
+    print("\nSingle threaded\n")
 
     task_list = get_task_list(n_tasks=8)
 
@@ -31,7 +31,7 @@ def multithreading_demo():
     """
     Demonstrates Python multithreading by running 8 IO bound (simulated) tasks in parallel.
     """
-    print("Multi-threaded\n")
+    print("\nMulti-threaded\n")
 
     n_workers = 8
     task_list = get_task_list(n_tasks=8)

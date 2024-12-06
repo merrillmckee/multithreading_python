@@ -14,7 +14,7 @@ def singleprocess_demo():
     """
     Demonstrates the default single process version of the multiprocessing_demo below as a reference.
     """
-    print("Single process\n")
+    print("\nSingle process\n")
 
     task_list = get_task_list(n_tasks=8)
 
@@ -31,7 +31,7 @@ def multiprocessing_demo():
     """
     Demonstrates Python multiprocessing by running 8 CPU bound (simulated) tasks in parallel.
     """
-    print("Multiprocessing\n")
+    print("\nMultiprocessing\n")
 
     n_workers = 8
     task_list = get_task_list(n_tasks=8)

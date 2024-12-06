@@ -1,27 +1,7 @@
 import time
 
 from concurrent.futures import as_completed, ThreadPoolExecutor
-
-
-def io_bound_simulator(task_num):
-    """
-    Simulates an IO bound task that takes task_num seconds to complete
-
-    Parameters
-    ----------
-    task_num:
-        Both task number and number of seconds this task will take
-
-    Returns
-    -------
-        Returns task_num + 100
-    """
-
-    time.sleep(task_num)
-    if task_num == 2:
-        # Simulate an IO exception
-        raise NotImplementedError("Some type of error in IO bound call")
-    return 100 + task_num
+from work_simulators import io_bound_simulator
 
 
 def get_task_list(n_tasks):

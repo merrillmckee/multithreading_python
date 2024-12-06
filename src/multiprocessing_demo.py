@@ -1,38 +1,7 @@
-import math
 import time
 
-import concurrent.futures
-
-
-def cpu_bound_simulator(task_num):
-    """
-    Simulates a CPU bound task that takes task_num seconds to complete
-
-    Parameters
-    ----------
-    task_num:
-        Both task number and number of seconds this task will take
-
-    Returns
-    -------
-        Returns task_num + 100
-    """
-
-    start = time.time()
-
-    values = list(range(100))
-    while True:
-        if time.time() - start > task_num:
-            # stop looping when time limit hit
-            break
-        x = time.time()
-        i = int(x * 100) % 100
-        values[i] = math.sqrt(x) * math.sqrt(1 + x)
-
-    if task_num == 2:
-        # Simulate an exception
-        raise NotImplementedError("Some type of error in CPU bound call")
-    return 100 + task_num
+from concurrent.futures import as_completed, ProcessPoolExecutor
+from work_simulators import cpu_bound_simulator
 
 
 def get_task_list(n_tasks):
@@ -67,12 +36,12 @@ def multiprocessing_demo():
     n_workers = 8
     task_list = get_task_list(n_tasks=8)
 
-    with concurrent.futures.ProcessPoolExecutor(max_workers=n_workers) as executor:
+    with ProcessPoolExecutor(max_workers=n_workers) as executor:
 
         futures = [executor.submit(cpu_bound_simulator, task_num) for task_num in task_list]
 
         start = time.time()
-        for future in concurrent.futures.as_completed(futures):
+        for future in as_completed(futures):
             try:
                 result = future.result()
                 print(f"Completed task {result} in {time.time() - start:.3f} seconds")

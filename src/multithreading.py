@@ -44,7 +44,7 @@ def singlethreaded_demo():
             result = io_bound_simulator(task_num)
             print(f"Completed task {result} in {time.time() - start:.3f} seconds")
         except Exception as e:
-            print(f"io_bound_sleep_three raised an exception: {e}")
+            print(f"io_bound_simulator raised an exception: {e}")
 
 
 def multithreading_demo():
@@ -56,7 +56,6 @@ def multithreading_demo():
     n_workers = 8
     task_list = get_task_list(n_tasks=8)
 
-
     with ThreadPoolExecutor(max_workers=n_workers) as executor:
 
         futures = [executor.submit(io_bound_simulator, task_num) for task_num in task_list]
@@ -67,7 +66,7 @@ def multithreading_demo():
                 result = future.result()
                 print(f"Completed task {result} in {time.time() - start:.3f} seconds")
             except Exception as e:
-                print(f"io_bound_sleep_three raised an exception: {e}")
+                print(f"io_bound_simulator raised an exception: {e}")
 
 
 if __name__ == "__main__":

@@ -46,7 +46,7 @@ async def io_bound_simulator_async(task_num):
 
 def cpu_bound_simulator(task_num):
     """
-    Simulates a CPU bound task that takes task_num seconds to complete
+    Simulates a CPU bound task that takes roughly task_num seconds to complete on my macbook
 
     Parameters
     ----------
@@ -58,16 +58,19 @@ def cpu_bound_simulator(task_num):
         Returns task_num + 100
     """
 
-    start = time.time()
+    total_iterations = 3_800_000 * task_num
 
     values = list(range(100))
-    while True:
-        if time.time() - start > task_num:
-            # stop looping when time limit hit
-            break
-        x = time.time()
-        i = int(x * 100) % 100
+    n = 0
+    while n < total_iterations:
+        x = time.time()  # random-ish number
+        i = int(x * 100) % 100  # random-ish index to store the result
+
+        # calculation with a couple "slow" square roots
         values[i] = math.sqrt(x) * math.sqrt(1 + x)
+
+        # counter
+        n += 1
 
     if task_num == 2:
         # Simulate an exception
